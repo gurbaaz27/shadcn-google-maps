@@ -64,13 +64,33 @@ export default async function IndexPage() {
           Modern address autocomplete for shadcn/ui.
         </PageHeaderHeading>
 
+        <PageHeaderDescription
+          className={cn(
+            fadeUpClassname,
+            "text-base sm:text-lg lg:motion-safe:[animation-delay:2500ms]",
+          )}
+        >
+          Session-token billing, typed place results, and a polished dropdown.
+          <br />
+          Copy-paste friendly. Customizable. Open Source.
+        </PageHeaderDescription>
+
+        <PlacesDemoHero
+          className={cn(
+            fadeUpClassname,
+            "w-full lg:motion-safe:[animation-delay:3000ms]",
+          )}
+        />
+
         <div
           className={cn(
             fadeUpClassname,
             "flex w-full max-w-xl flex-col items-center gap-3 px-4 lg:motion-safe:[animation-delay:1000ms]",
           )}
         >
-          <InstallCommand registryUrl={siteConfig.registry.placesAutocomplete} />
+          <InstallCommand
+            registryUrl={siteConfig.registry.placesAutocomplete}
+          />
 
           <PageActions>
             <Link
@@ -121,48 +141,7 @@ export default async function IndexPage() {
             </a>
             , which Google recommends for new integrations.
           </span>
-          <span className="block text-sm">
-            As of March 1, 2025, AutocompleteService is not available to new
-            customers; Google will give at least 12 months notice before
-            discontinuing support. See the{" "}
-            <a
-              href="https://developers.google.com/maps/legacy"
-              className="underline underline-offset-4 hover:text-foreground"
-              target="_blank"
-              rel="noreferrer"
-            >
-              legacy notice
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://developers.google.com/maps/documentation/javascript/places-migration-overview"
-              className="underline underline-offset-4 hover:text-foreground"
-              target="_blank"
-              rel="noreferrer"
-            >
-              migration guide
-            </a>
-            .
-          </span>
         </PageHeaderDescription>
-
-        <PageHeaderDescription
-          className={cn(
-            fadeUpClassname,
-            "text-base sm:text-lg lg:motion-safe:[animation-delay:2500ms]",
-          )}
-        >
-          Session-token billing, typed place results, and a polished dropdown.
-          <br />
-          Copy-paste friendly. Customizable. Open Source.
-        </PageHeaderDescription>
-
-        <PlacesDemoHero
-          className={cn(
-            fadeUpClassname,
-            "w-full lg:motion-safe:[animation-delay:3000ms]",
-          )}
-        />
       </PageHeader>
 
       <ExampleCode />
@@ -194,7 +173,6 @@ export default async function IndexPage() {
             "lg:motion-safe:[animation-delay:1000ms]",
           )}
         />
-
       </PageHeader>
     </div>
   )
