@@ -4,6 +4,7 @@ import path from "path"
 import { Star } from "lucide-react"
 
 import { CopyLlmsButton } from "@/app/(components)/copy-llms-button"
+import { InstallCommand } from "@/app/(components)/install-command"
 import { ExampleCode } from "@/app/(components)/example-code"
 import { PlacesDemoHero } from "@/app/(components)/places-demo"
 import { Icons } from "@/components/icons"
@@ -55,7 +56,7 @@ export default async function IndexPage() {
     <div className="container relative flex flex-1 flex-col items-center justify-center">
       <PageHeader>
         <PageHeaderNotifier>
-          Google Places API (New) — not the legacy Autocomplete widget.
+          Save yourself the manual work — drop-in address autocomplete.
           <span className="mx-2">📍</span>
         </PageHeaderNotifier>
 
@@ -66,26 +67,71 @@ export default async function IndexPage() {
         <PlacesDemoHero
           className={cn(
             fadeUpClassname,
-            "lg:motion-safe:[animation-delay:1000ms]",
+            "my-4 w-full md:my-8 lg:motion-safe:[animation-delay:1000ms]",
           )}
         />
 
         <PageHeaderDescription
           className={cn(
             fadeUpClassname,
-            "lg:motion-safe:[animation-delay:3000ms]",
+            "space-y-4 lg:motion-safe:[animation-delay:3000ms]",
           )}
         >
-          Ship forms with session-token billing, typed place results, and a
-          polished dropdown.
-          <br />
-          Copy-paste friendly. Customizable. Open Source.
+          <span className="block">
+            Unlike most snippets that still wire up the legacy{" "}
+            <a
+              href="https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service"
+              className="underline underline-offset-4 hover:text-foreground"
+              target="_blank"
+              rel="noreferrer"
+            >
+              AutocompleteService
+            </a>
+            , this component uses{" "}
+            <a
+              href="https://developers.google.com/maps/documentation/javascript/places-migration-overview"
+              className="underline underline-offset-4 hover:text-foreground"
+              target="_blank"
+              rel="noreferrer"
+            >
+              AutocompleteSuggestion
+            </a>
+            , which Google recommends for new integrations.
+          </span>
+          <span className="block text-sm">
+            As of March 1, 2025, AutocompleteService is not available to new
+            customers; Google will give at least 12 months notice before
+            discontinuing support. See the{" "}
+            <a
+              href="https://developers.google.com/maps/legacy"
+              className="underline underline-offset-4 hover:text-foreground"
+              target="_blank"
+              rel="noreferrer"
+            >
+              legacy notice
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://developers.google.com/maps/documentation/javascript/places-migration-overview"
+              className="underline underline-offset-4 hover:text-foreground"
+              target="_blank"
+              rel="noreferrer"
+            >
+              migration guide
+            </a>
+            .
+          </span>
+          <span className="block">
+            Session-token billing, typed place results, and a polished dropdown.
+            <br />
+            Copy-paste friendly. Customizable. Open Source.
+          </span>
         </PageHeaderDescription>
 
         <PageActions
           className={cn(
             fadeUpClassname,
-            "lg:motion-safe:[animation-delay:3000ms]",
+            "pb-2 md:pb-4 lg:motion-safe:[animation-delay:3000ms]",
           )}
         >
           <Link
@@ -107,15 +153,23 @@ export default async function IndexPage() {
           </Link>
           <CopyLlmsButton content={llmsContent} />
         </PageActions>
+
+        <InstallCommand
+          registryUrl={siteConfig.registry.placesAutocomplete}
+          className={cn(
+            fadeUpClassname,
+            "px-4 lg:motion-safe:[animation-delay:3500ms]",
+          )}
+        />
       </PageHeader>
 
       <ExampleCode />
 
-      <PageHeader>
+      <PageHeader className="mt-16 md:mt-24">
         <PageHeaderHeading
           className={cn(
             fadeUpClassname,
-            "py-4 text-3xl md:text-4xl lg:motion-safe:[animation-delay:4000ms]",
+            "py-6 text-3xl md:py-8 md:text-4xl lg:motion-safe:[animation-delay:4000ms]",
           )}
         >
           Examples
@@ -139,23 +193,6 @@ export default async function IndexPage() {
           )}
         />
 
-        <PageHeaderHeading
-          className={cn(
-            fadeUpClassname,
-            "text-xl md:text-2xl lg:motion-safe:[animation-delay:4000ms]",
-          )}
-        >
-          Install via registry
-        </PageHeaderHeading>
-
-        <PageHeaderDescription
-          className={cn(
-            fadeUpClassname,
-            "font-mono text-sm lg:motion-safe:[animation-delay:4000ms]",
-          )}
-        >
-          bunx shadcn@latest add {siteConfig.registry.placesAutocomplete}
-        </PageHeaderDescription>
       </PageHeader>
     </div>
   )

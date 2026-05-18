@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Gurbaaz Singh Nandra",
-      url: "https://gurbaaz.me",
+      url: "https://gurbaaz.xyz",
     },
   ],
   creator: "gurbaaz",
@@ -70,7 +70,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn(GeistSans.className, fontMono.variable)}>
+    <html
+      lang="en"
+      className={cn("dark", GeistSans.className, fontMono.variable)}
+    >
       <body className="min-h-dvh bg-background font-sans antialiased">
         <div className="relative flex min-h-dvh flex-col bg-background">
           <SiteHeader />

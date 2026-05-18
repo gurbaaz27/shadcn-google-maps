@@ -23,7 +23,7 @@ ${tsx}
 
 export function ExampleCode() {
   return (
-    <div className="code-example relative w-full overflow-hidden lg:animate-none lg:opacity-0 lg:animate-fade-in [animation-delay:5000ms]">
+    <div className="code-example relative mt-8 w-full overflow-hidden md:mt-12 lg:mt-16 lg:animate-none lg:opacity-0 lg:animate-fade-in [animation-delay:5000ms]">
       <div className="w-full">
         <Code dark={false} code={code} toCopy={tsx} />
         <Code dark={true} code={code} toCopy={tsx} />

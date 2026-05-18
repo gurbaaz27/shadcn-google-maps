@@ -24,7 +24,9 @@ export function PlacesDemoHero({
   const [selected, setSelected] = useState<SelectedPlace | null>(null)
 
   return (
-    <div className={cn("flex w-full flex-col items-center gap-3", className)}>
+    <div
+      className={cn("flex w-full flex-col items-center gap-4 md:gap-6", className)}
+    >
       {label ? (
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
       ) : null}

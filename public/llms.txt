@@ -12,7 +12,19 @@ This uses the modern Places API (New), not legacy `AutocompleteService.getPlaceP
 
 ### shadcn CLI
 
+Registry URL: `https://shadcn-google-maps.vercel.app/r/places-autocomplete.json`
+
 ```bash
+# npm
+npx shadcn@latest add https://shadcn-google-maps.vercel.app/r/places-autocomplete.json
+
+# yarn
+npx shadcn@latest add https://shadcn-google-maps.vercel.app/r/places-autocomplete.json
+
+# pnpm
+pnpm dlx shadcn@latest add https://shadcn-google-maps.vercel.app/r/places-autocomplete.json
+
+# bun
 bunx shadcn@latest add https://shadcn-google-maps.vercel.app/r/places-autocomplete.json
 ```
 
