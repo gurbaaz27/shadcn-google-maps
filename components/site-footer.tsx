@@ -14,14 +14,14 @@ export function SiteFooter() {
           >
             GurbaazNandra
           </a>
-          . Website inspired by{" "}
+          . Website inspired from{" "}
           <a
-            href="https://shadcn-calendar-heatmap.vercel.app/"
+            href="https://input-otp.rodz.dev/"
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"
           >
-            shadcn-calendar-heatmap
+            rodz
           </a>
           . Source on{" "}
           <a

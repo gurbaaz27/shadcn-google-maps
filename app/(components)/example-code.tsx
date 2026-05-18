@@ -6,6 +6,8 @@ const tsx = `import { PlacesAutocomplete } from "@/components/ui/places-autocomp
 export default function AddressField() {
   return (
     <PlacesAutocomplete
+      className={...}
+      countryCode={...} // Optional, e.g. "US", "IN", "GB" etc.
       placeholder="Search for an address"
       onPlaceSelect={(place) => {
         console.log(place.address, place.lat, place.lng, place.placeId)
