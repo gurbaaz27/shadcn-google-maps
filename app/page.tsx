@@ -55,19 +55,29 @@ export default async function IndexPage() {
   return (
     <div className="container relative flex flex-1 flex-col items-center pb-12">
       <PageHeader>
-        <PageHeaderNotifier>
+        <PageHeaderNotifier
+          className={cn(
+            fadeUpClassname,
+            "lg:motion-safe:[animation-delay:1000ms]",
+          )}
+        >
           Save yourself the manual work — drop-in address autocomplete.
           <span className="mx-2">📍</span>
         </PageHeaderNotifier>
 
-        <PageHeaderHeading className={cn(fadeUpClassname)}>
+        <PageHeaderHeading
+          className={cn(
+            fadeUpClassname,
+            "lg:motion-safe:[animation-delay:1500ms]",
+          )}
+        >
           Modern address autocomplete for shadcn/ui.
         </PageHeaderHeading>
 
         <PageHeaderDescription
           className={cn(
             fadeUpClassname,
-            "text-base sm:text-lg lg:motion-safe:[animation-delay:2500ms]",
+            "text-base sm:text-lg lg:motion-safe:[animation-delay:2000ms]",
           )}
         >
           Session-token billing, typed place results, and a polished dropdown.
@@ -78,14 +88,14 @@ export default async function IndexPage() {
         <PlacesDemoHero
           className={cn(
             fadeUpClassname,
-            "w-full lg:motion-safe:[animation-delay:3000ms]",
+            "w-full lg:motion-safe:[animation-delay:2500ms]",
           )}
         />
 
         <div
           className={cn(
             fadeUpClassname,
-            "flex w-full max-w-xl flex-col items-center gap-3 px-4 lg:motion-safe:[animation-delay:1000ms]",
+            "flex w-full max-w-xl flex-col items-center gap-3 px-4 lg:motion-safe:[animation-delay:3000ms]",
           )}
         >
           <InstallCommand
@@ -117,7 +127,7 @@ export default async function IndexPage() {
         <PageHeaderDescription
           className={cn(
             fadeUpClassname,
-            "space-y-4 lg:motion-safe:[animation-delay:2000ms]",
+            "space-y-4 lg:motion-safe:[animation-delay:3500ms]",
           )}
         >
           <span className="block">
@@ -159,7 +169,7 @@ export default async function IndexPage() {
         <PageHeaderHeading
           className={cn(
             fadeUpClassname,
-            "text-xl md:text-2xl lg:motion-safe:[animation-delay:4000ms]",
+            "text-xl md:text-2xl lg:motion-safe:[animation-delay:4500ms]",
           )}
         >
           Country restriction
@@ -170,7 +180,7 @@ export default async function IndexPage() {
           label="Suggestions biased to United States (includedRegionCodes)"
           className={cn(
             fadeUpClassname,
-            "lg:motion-safe:[animation-delay:1000ms]",
+            "lg:motion-safe:[animation-delay:5000ms]",
           )}
         />
       </PageHeader>
