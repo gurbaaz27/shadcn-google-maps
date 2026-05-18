@@ -276,7 +276,13 @@ export function PlacesAutocomplete({
   }
 
   return (
-    <div className={cn("relative w-full max-w-xl", className)}>
+    <div
+      className={cn(
+        "relative w-full max-w-xl",
+        open && "isolate z-50",
+        className,
+      )}
+    >
       {GoogleMapsScript ? <GoogleMapsScript /> : null}
 
       <div className="relative">
@@ -319,9 +325,9 @@ export function PlacesAutocomplete({
         <div
           id={listboxId}
           role="listbox"
-          className="absolute top-[calc(100%+6px)] right-0 left-0 z-50 overflow-hidden rounded-lg border bg-popover text-popover-foreground shadow-md"
+          className="absolute top-[calc(100%+6px)] right-0 left-0 z-[100] overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-lg"
         >
-          <div className="max-h-64 overflow-y-auto p-1">
+          <div className="max-h-64 overflow-y-auto bg-card p-1">
             {suggestions.map((suggestion, index) => {
               const [primary, ...secondaryParts] = suggestion.label.split(",")
               const secondary = secondaryParts.join(",").trim()
@@ -340,7 +346,7 @@ export function PlacesAutocomplete({
                     "flex w-full items-start gap-3 rounded-md px-3 py-2.5 text-left transition-colors",
                     isActive
                       ? "bg-accent text-accent-foreground"
-                      : "hover:bg-accent",
+                      : "bg-card hover:bg-accent",
                   )}
                 >
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -364,7 +370,7 @@ export function PlacesAutocomplete({
             })}
           </div>
           {loadingSuggestions ? (
-            <div className="border-t px-3 py-2 text-xs text-muted-foreground">
+            <div className="border-t border-border bg-card px-3 py-2 text-xs text-muted-foreground">
               Loading suggestions...
             </div>
           ) : null}

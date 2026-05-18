@@ -53,7 +53,7 @@ export default async function IndexPage() {
   )
 
   return (
-    <div className="container relative flex flex-1 flex-col items-center justify-center">
+    <div className="container relative flex flex-1 flex-col items-center pb-12">
       <PageHeader>
         <PageHeaderNotifier>
           Save yourself the manual work — drop-in address autocomplete.
@@ -64,17 +64,40 @@ export default async function IndexPage() {
           Modern address autocomplete for shadcn/ui.
         </PageHeaderHeading>
 
-        <PlacesDemoHero
+        <div
           className={cn(
             fadeUpClassname,
-            "my-4 w-full md:my-8 lg:motion-safe:[animation-delay:1000ms]",
+            "flex w-full max-w-xl flex-col items-center gap-3 px-4 lg:motion-safe:[animation-delay:1000ms]",
           )}
-        />
+        >
+          <InstallCommand registryUrl={siteConfig.registry.placesAutocomplete} />
+
+          <PageActions>
+            <Link
+              target="_blank"
+              rel="noreferrer"
+              href={siteConfig.links.github}
+              className={cn(
+                "group relative py-0!",
+                buttonVariants({ variant: "outline" }),
+              )}
+            >
+              <Icons.gitHub className="mr-2 h-4 w-4" />
+              <div className="flex h-full items-center">
+                <div className="hidden md:block">{siteConfig.name}</div>
+                <div className="mx-4 hidden h-full w-px bg-input group-hover:bg-foreground md:block" />
+                <Star size={16} className="mr-2" />
+                <div>{starCount}</div>
+              </div>
+            </Link>
+            <CopyLlmsButton content={llmsContent} />
+          </PageActions>
+        </div>
 
         <PageHeaderDescription
           className={cn(
             fadeUpClassname,
-            "space-y-4 lg:motion-safe:[animation-delay:3000ms]",
+            "space-y-4 lg:motion-safe:[animation-delay:2000ms]",
           )}
         >
           <span className="block">
@@ -121,51 +144,30 @@ export default async function IndexPage() {
             </a>
             .
           </span>
-          <span className="block">
-            Session-token billing, typed place results, and a polished dropdown.
-            <br />
-            Copy-paste friendly. Customizable. Open Source.
-          </span>
         </PageHeaderDescription>
 
-        <PageActions
+        <PageHeaderDescription
           className={cn(
             fadeUpClassname,
-            "pb-2 md:pb-4 lg:motion-safe:[animation-delay:3000ms]",
+            "text-base sm:text-lg lg:motion-safe:[animation-delay:2500ms]",
           )}
         >
-          <Link
-            target="_blank"
-            rel="noreferrer"
-            href={siteConfig.links.github}
-            className={cn(
-              "group relative !py-0",
-              buttonVariants({ variant: "outline" }),
-            )}
-          >
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-            <div className="flex h-full items-center">
-              <div className="hidden md:block">{siteConfig.name}</div>
-              <div className="mx-4 hidden h-full w-px bg-input group-hover:bg-foreground md:block" />
-              <Star size={16} className="mr-2" />
-              <div>{starCount}</div>
-            </div>
-          </Link>
-          <CopyLlmsButton content={llmsContent} />
-        </PageActions>
+          Session-token billing, typed place results, and a polished dropdown.
+          <br />
+          Copy-paste friendly. Customizable. Open Source.
+        </PageHeaderDescription>
 
-        <InstallCommand
-          registryUrl={siteConfig.registry.placesAutocomplete}
+        <PlacesDemoHero
           className={cn(
             fadeUpClassname,
-            "px-4 lg:motion-safe:[animation-delay:3500ms]",
+            "w-full lg:motion-safe:[animation-delay:3000ms]",
           )}
         />
       </PageHeader>
 
       <ExampleCode />
 
-      <PageHeader className="mt-16 md:mt-24">
+      <PageHeader className="mt-8 md:mt-12">
         <PageHeaderHeading
           className={cn(
             fadeUpClassname,

@@ -238,6 +238,14 @@
   display: none;
 }
 
+.dark .code-example-light {
+  display: none;
+}
+
+.dark .code-example-dark {
+  display: block;
+}
+
 @media (prefers-color-scheme: dark) {
   .code-example-light {
     display: none;
