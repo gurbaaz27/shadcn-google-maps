@@ -30,24 +30,25 @@ export function PlacesDemoHero({
       {label ? (
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
       ) : null}
-      <PlacesAutocomplete
-        className={fadeUpClassname}
-        countryCode={countryCode}
-        placeholder={
-          countryCode
-            ? `Search addresses in ${countryCode.toUpperCase()}`
-            : "Start typing an address"
-        }
-        onPlaceSelect={(place) => {
-          setSelected(place)
-          toast.success("Place selected", {
-            description:
-              place.lat != null && place.lng != null
-                ? `${place.address} (${place.lat.toFixed(5)}, ${place.lng.toFixed(5)})`
-                : place.address,
-          })
-        }}
-      />
+      <div className={cn("w-full max-w-xl", fadeUpClassname)}>
+        <PlacesAutocomplete
+          countryCode={countryCode}
+          placeholder={
+            countryCode
+              ? `Search addresses in ${countryCode.toUpperCase()}`
+              : "Start typing an address"
+          }
+          onPlaceSelect={(place) => {
+            setSelected(place)
+            toast.success("Place selected", {
+              description:
+                place.lat != null && place.lng != null
+                  ? `${place.address} (${place.lat.toFixed(5)}, ${place.lng.toFixed(5)})`
+                  : place.address,
+            })
+          }}
+        />
+      </div>
       {selected ? (
         <p className="max-w-xl text-center text-xs text-muted-foreground">
           Selected: {selected.address}

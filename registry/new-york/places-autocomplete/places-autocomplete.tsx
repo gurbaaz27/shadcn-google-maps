@@ -1,7 +1,15 @@
 "use client"
 
 import { MapPin } from "lucide-react"
-import { useCallback, useEffect, useId, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react"
+import { createPortal } from "react-dom"
 
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
@@ -72,6 +80,47 @@ export function PlacesAutocomplete({
   const [selectingId, setSelectingId] = useState<string | null>(null)
   const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([])
   const [activeIndex, setActiveIndex] = useState(-1)
+  const [dropdownRect, setDropdownRect] = useState<{
+    top: number
+    left: number
+    width: number
+  } | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const updateDropdownRect = useCallback(() => {
+    const input = inputRef.current
+    if (!input) {
+      return
+    }
+
+    const rect = input.getBoundingClientRect()
+    setDropdownRect({
+      top: rect.bottom + 6,
+      left: rect.left,
+      width: rect.width,
+    })
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setDropdownRect(null)
+      return
+    }
+
+    updateDropdownRect()
+
+    window.addEventListener("resize", updateDropdownRect)
+    window.addEventListener("scroll", updateDropdownRect, true)
+
+    return () => {
+      window.removeEventListener("resize", updateDropdownRect)
+      window.removeEventListener("scroll", updateDropdownRect, true)
+    }
+  }, [open, suggestions.length, updateDropdownRect])
 
   const setInputValue = useCallback(
     (nextValue: string) => {
@@ -277,11 +326,7 @@ export function PlacesAutocomplete({
 
   return (
     <div
-      className={cn(
-        "relative w-full max-w-xl",
-        open && "isolate z-50",
-        className,
-      )}
+      className={cn("relative w-full max-w-xl", className)}
     >
       {GoogleMapsScript ? <GoogleMapsScript /> : null}
 
@@ -321,13 +366,20 @@ export function PlacesAutocomplete({
         ) : null}
       </div>
 
-      {open ? (
-        <div
-          id={listboxId}
-          role="listbox"
-          className="absolute top-[calc(100%+6px)] right-0 left-0 z-[100] overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-lg"
-        >
-          <div className="max-h-64 overflow-y-auto bg-card p-1">
+      {mounted && open && dropdownRect
+        ? createPortal(
+            <div
+              id={listboxId}
+              role="listbox"
+              style={{
+                position: "fixed",
+                top: dropdownRect.top,
+                left: dropdownRect.left,
+                width: dropdownRect.width,
+              }}
+              className="z-200 overflow-hidden rounded-lg border border-border bg-popover text-popover-foreground shadow-xl ring-1 ring-border/50"
+            >
+              <div className="max-h-64 overflow-y-auto bg-popover p-1">
             {suggestions.map((suggestion, index) => {
               const [primary, ...secondaryParts] = suggestion.label.split(",")
               const secondary = secondaryParts.join(",").trim()
@@ -346,7 +398,7 @@ export function PlacesAutocomplete({
                     "flex w-full items-start gap-3 rounded-md px-3 py-2.5 text-left transition-colors",
                     isActive
                       ? "bg-accent text-accent-foreground"
-                      : "bg-card hover:bg-accent",
+                      : "bg-popover hover:bg-accent",
                   )}
                 >
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -370,12 +422,14 @@ export function PlacesAutocomplete({
             })}
           </div>
           {loadingSuggestions ? (
-            <div className="border-t border-border bg-card px-3 py-2 text-xs text-muted-foreground">
-              Loading suggestions...
-            </div>
-          ) : null}
-        </div>
-      ) : null}
+                <div className="border-t border-border bg-popover px-3 py-2 text-xs text-muted-foreground">
+                  Loading suggestions...
+                </div>
+              ) : null}
+            </div>,
+            document.body,
+          )
+        : null}
 
       {!hasApiKey ? (
         <p className="mt-1 text-xs text-muted-foreground">
