@@ -1,0 +1,90 @@
+# shadcn-google-maps
+
+> Google Places autocomplete for shadcn/ui using the Places API (New) — AutocompleteSuggestion, session tokens, and PlacePrediction.toPlace().
+
+## Overview
+
+shadcn-google-maps provides a copy-paste / CLI-installable `PlacesAutocomplete` component for Next.js apps. It loads the Maps JavaScript API with the `places` library, debounces user input, fetches suggestions via `AutocompleteSuggestion.fetchAutocompleteSuggestions`, and resolves a full place with `fetchFields` on selection.
+
+This uses the modern Places API (New), not legacy `AutocompleteService.getPlacePredictions` or the `google.maps.places.Autocomplete` widget.
+
+## Installation
+
+### shadcn CLI
+
+```bash
+bunx shadcn@latest add https://shadcn-google-maps.vercel.app/r/places-autocomplete.json
+```
+
+### Manual
+
+Copy from:
+https://github.com/gurbaaz27/shadcn-google-maps/tree/main/registry/new-york/places-autocomplete
+
+### Dependencies
+
+- `@types/google.maps` (TypeScript)
+- shadcn `input` and `button` components
+- `lucide-react`
+- Next.js `next/script` (included with Next.js)
+
+## Environment
+
+```env
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_key_here
+```
+
+Enable in Google Cloud Console:
+- Maps JavaScript API
+- Places API (New)
+
+Restrict the API key with HTTP referrers for your production and localhost origins.
+
+## Component API
+
+### PlacesAutocomplete props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | string | Controlled input value |
+| defaultValue | string | Uncontrolled initial value |
+| onValueChange | (value: string) => void | Input text changes |
+| onPlaceSelect | (place: SelectedPlace) => void | Required. Fired when user picks a suggestion |
+| apiKey | string | Overrides NEXT_PUBLIC_GOOGLE_MAPS_API_KEY |
+| countryCode | string \| null | ISO region code for includedRegionCodes |
+| debounceMs | number | Default 300 |
+| placeholder | string | Input placeholder |
+| disabled | boolean | Disables input |
+| className | string | Wrapper class |
+| inputClassName | string | Input class |
+| showPoweredByGoogle | boolean | Default true (attribution) |
+
+### SelectedPlace
+
+```typescript
+type SelectedPlace = {
+  address: string
+  lat: number | null
+  lng: number | null
+  placeId: string | null
+}
+```
+
+## Usage
+
+```tsx
+import { PlacesAutocomplete } from "@/components/ui/places-autocomplete"
+
+<PlacesAutocomplete
+  countryCode="us"
+  onPlaceSelect={(place) => {
+    console.log(place.address, place.lat, place.lng)
+  }}
+/>
+```
+
+## Registry
+
+Built JSON: https://shadcn-google-maps.vercel.app/r/places-autocomplete.json
+
+Rebuild locally: `bun run registry:build`

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "shadcn-google-maps",
+  "homepage": "https://shadcn-google-maps.vercel.app",
+  "items": [
+    {
+      "name": "places-autocomplete",
+      "type": "registry:component",
+      "title": "Places Autocomplete",
+      "description": "Address autocomplete using Google Places API (New) with shadcn Input and accessible suggestion list.",
+      "dependencies": ["@types/google.maps"],
+      "registryDependencies": ["input", "button"],
+      "files": [
+        {
+          "path": "registry/new-york/places-autocomplete/places-autocomplete.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/new-york/places-autocomplete/hooks/use-google-places-script.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    }
+  ]
+}
